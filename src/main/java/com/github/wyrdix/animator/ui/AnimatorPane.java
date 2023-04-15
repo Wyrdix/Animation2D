@@ -1,22 +1,37 @@
 package com.github.wyrdix.animator.ui;
 
+import com.github.wyrdix.animator.Animation;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class AnimatorPane extends JPanel {
-    public AnimatorPane() {
 
+    private final Animation animation;
+    private int tick;
+    private long last = -1;
+
+    public AnimatorPane() {
+        animation = new Animation();
+        tick = 0;
+        new Thread(() -> {
+            while (true){
+                if(System.currentTimeMillis() - last < 1000/animation.rate()) continue;
+                repaint();
+            }
+        }).start();
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
+        if(System.currentTimeMillis() - last < 1000/animation.rate()) return;
+
         super.paintComponent(g);
-        g.setColor(Color.WHITE);
-        g.clearRect(0, 0, getWidth(), getHeight());
-
         g.translate(getWidth()/2, getHeight()/2);
-
         g.setColor(Color.BLACK);
-        g.fillOval(0, 0, 10, 10);
+
+        animation.drawFrame(tick++, g);
+
+        last = System.currentTimeMillis();
     }
 }
