@@ -29,7 +29,7 @@ public class AnimatorPane extends JLabel {
             GifSequenceWriter writer = new GifSequenceWriter(output, BufferedImage.TYPE_INT_RGB, 1000/animation.rate(), true);
 
             new Thread(() -> {
-                while (!Main.frame.isClosed() && tick < 1400){
+                while (!Main.frame.isClosed()){
                     if(System.currentTimeMillis() - last < 1000/animation.rate()) continue;
 
                     BufferedImage bi = new BufferedImage(Main.frame.getWidth(), Main.frame.getHeight(), BufferedImage.TYPE_INT_RGB);

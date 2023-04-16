@@ -13,6 +13,9 @@ public interface Object extends IField<List<Vector2>> {
 
     IField<Color> color();
 
+    @Override
+    List<Vector2> apply(Integer tick);
+
     @SuppressWarnings("unchecked")
     abstract class ObjectBuilder<T extends Object, U extends ObjectBuilder<T, U>> {
 

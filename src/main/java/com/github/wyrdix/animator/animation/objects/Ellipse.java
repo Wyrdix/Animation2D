@@ -35,14 +35,14 @@ public interface Ellipse extends Object {
         List<Vector2> list = new ArrayList<>();
 
         for (int i = 0; i < n; i++)
-            list.add(Vector2.fromPolar(length, spacing * i + phase).translate(center));
+            list.add(Vector2.fromPolar(IField.constant(length), IField.constant(spacing * i + phase)).translate(center));
 
         return list;
     }
 
     class EllipseBuilder extends ObjectBuilder<Ellipse, EllipseBuilder> {
 
-        protected IField<Vector2> center = IField.constant(new Vector2(0, 0));
+        protected IField<Vector2> center = IField.constant(new Vector2(IField.constant(0d), IField.constant(0d)));
         private IField<Integer> particles;
         private IField<Double> length;
         private IField<Double> phase;
