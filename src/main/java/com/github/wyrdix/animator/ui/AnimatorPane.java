@@ -31,7 +31,7 @@ public class AnimatorPane extends JLabel {
             int height = Main.frame.getHeight();
 
             new Thread(() -> {
-                while (!Main.frame.isClosed() && tick < 80){
+                while (!Main.frame.isClosed()){
                     if(System.currentTimeMillis() - last < 1000/animation.rate()) continue;
 
                     BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -88,6 +88,6 @@ public class AnimatorPane extends JLabel {
         int width = Main.frame.getWidth();
         int height = Main.frame.getHeight();
         g.fillRect(-width/2, -height/2, width,height);
-        animation.drawFrame(tick, g);
+        animation.drawFrame(g, tick);
     }
 }

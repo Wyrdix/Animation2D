@@ -1,4 +1,4 @@
-package com.github.wyrdix.animator.animation.objects;
+package com.github.wyrdix.animator.animation.elements;
 
 import com.github.wyrdix.animator.animation.IField;
 import com.github.wyrdix.animator.animation.Vector2;

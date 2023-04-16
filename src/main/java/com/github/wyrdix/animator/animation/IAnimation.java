@@ -9,5 +9,5 @@ public interface IAnimation {
      */
     int rate();
 
-    void drawFrame(int frame, Graphics g);
+    void drawFrame(Graphics g, int tick);
 }
