@@ -27,14 +27,16 @@ public class AnimatorPane extends JLabel {
             ImageOutputStream output = new FileImageOutputStream(new File("Z:/Misc/Animator2D/target/my_animated_image.gif"));
 
             GifSequenceWriter writer = new GifSequenceWriter(output, BufferedImage.TYPE_INT_RGB, 1000/animation.rate(), true);
+            int width = Main.frame.getWidth();
+            int height = Main.frame.getHeight();
 
             new Thread(() -> {
-                while (!Main.frame.isClosed()){
+                while (!Main.frame.isClosed() && tick < 80){
                     if(System.currentTimeMillis() - last < 1000/animation.rate()) continue;
 
-                    BufferedImage bi = new BufferedImage(Main.frame.getWidth(), Main.frame.getHeight(), BufferedImage.TYPE_INT_RGB);
+                    BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
                     Graphics g = bi.createGraphics();
-                    g.translate(getWidth()/2, getHeight()/2);
+                    g.translate(width/2, height/2);
                     animate(g);
                     g.dispose();
 
@@ -83,7 +85,9 @@ public class AnimatorPane extends JLabel {
 
     public void animate(Graphics g){
         g.setColor(Color.WHITE);
-        g.fillRect(-getWidth()/2, -getHeight()/2, getWidth(), getHeight());
+        int width = Main.frame.getWidth();
+        int height = Main.frame.getHeight();
+        g.fillRect(-width/2, -height/2, width,height);
         animation.drawFrame(tick, g);
     }
 }
