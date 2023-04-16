@@ -1,0 +1,38 @@
+{
+    List<Element> objects = new ArrayList<>();
+
+    Ellipse build = Ellipse.builder()
+            .setBorder(IField.constant(false))
+            .setParticles(IField.constant(1000))
+            .setLength(IField.constant(100d))
+            .setPhase(t -> t * Math.PI * 2/100)
+            .setCenter(new Vector2(0, 0)).build();
+
+    Tracer tracer = Tracer.builder()
+            .setTracer(build.andThen(s -> s.get(0)))
+            .setParticles(tick ->{
+                if (tick % 100 < 50) {
+                    return 100;
+                }else{
+                    return (100 - tick%100) * 2;
+                }
+            })
+            .setBorder(IField.constant(true))
+            .setColor(IField.constant(Color.BLACK)).build();
+    Tracer tracer2 = Tracer.builder()
+            .setTracer(build.andThen(s -> s.get(s.size()/2)))
+            .setParticles(tick ->{
+                if (tick % 100 < 50) {
+                    return 100;
+                }else{
+                    return (100 - tick%100) * 2;
+                }
+            })
+            .setBorder(IField.constant(true))
+            .setColor(IField.constant(Color.BLACK)).build();
+
+    objects.add(tracer);
+    objects.add(tracer2);
+
+    elementList = IField.constant(objects);
+}
